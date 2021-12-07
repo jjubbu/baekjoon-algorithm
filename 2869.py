@@ -1,10 +1,24 @@
-A, B, V = map(int, input().split())
+import sys
+A, B, V = map(int, sys.stdin.readline().split())
 
-result = 0
-count = 0
-while result < V :
-    result = result + A
-    if result < V :
-        result = result - B
-    count = count + 1
-print(result)
+n = (V-A)/(A-B)
+def s(N):
+    if N != int(N):
+        return N+2
+    else :
+        return N+1
+print(int(s(n)))
+
+#코드개선 필요.
+# 68ms, 171B
+
+# 달팽이가 올라야할 높이 V에서 달팽이가 하루동안 올라갈 수 있는 거리 A를 뺀다.
+# A-B는 달팽이가 24시간동안 올라갈 수 있는 거리이다.
+# 따라서 V-A를 A-B로 나눴을때 정수가 나오면 다음날 아침 달팽이가 A만큼 이동해서 막대를 완주할 수 있다.
+# 이 경우 달팽이가 막대를 완주하기까지 걸린 시간은 ((V-A)/(A-B) +1)일 이다.
+# (달팽이는 완주하면 밤이라도 내려오지 않기 때문.)
+
+# (V-A)/(A-B) 가 정수가 아니라 소수점이 찍힌다면 정수부분이 n이라 했을 때 n(A-B)일 동안 이동을 하고
+# 다음날 A만큼 올라가도 소수점 아래만큼의 길이가 남아 이날 밤 달팽이는 미끄러져 내려온다.
+# 이때 이 소수점 아래만큼의 길이는 A-B보다 작기 때문에 이날 A-B만큼 올라갔다면 남은 거리는 A보다 짧다.
+# 따라서 이 다음날 달팽이는 완주하므로 달팽이가 완주한 시간은 ((V-A)/(A-B) +2)일 이다.
